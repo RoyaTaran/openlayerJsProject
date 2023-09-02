@@ -55,20 +55,12 @@ map.addInteraction(draw);
 let zoomSlider = new ol.control.ZoomSlider();
 map.addControl(zoomSlider);
 
-// map.on("singleclick", (e) => {
-//   let coordinate = e.coordinate;
-//   popupContent.innerHTML = coordinate;
-//   overlay.setPosition(coordinate);
-// });
-
 inputEntry.addEventListener("click", () => {
   if (!inputTitle.value || !inputDescription.value) {
     alert("لطفا عنوان و توضیحات را وارد نمایید");
     return;
   }
-  console.log("layer", layer.getSource().getFeatures());
   let faeture = layer.getSource().getFeatures()[0];
-  // faeture.setProperties({'123':inputTitle.value,'type':100});
   faeture.set("inputTitle", inputTitle.value);
   faeture.set("inputDescription", inputDescription.value);
   points.push(faeture);
@@ -88,16 +80,9 @@ map.on("click", (e) => {
     if ((feature, layer)) {
       let titleValue = feature.get("inputTitle");
       let descriptionValue = feature.get("inputDescription");
-        popupContent.innerHTML = `<div>نوع صنف : ${titleValue}</div><div>توضیحات : ${descriptionValue}</div>`;
-        let coordinate = e.coordinate;
-        overlay.setPosition(coordinate);
-      
-      console.log(
-        `titleValue==========${titleValue}  descriptionValue===========${descriptionValue}`
-      );
+      popupContent.innerHTML = `<div>نوع صنف : ${titleValue}</div><div>توضیحات : ${descriptionValue}</div>`;
+      let coordinate = e.coordinate;
+      overlay.setPosition(coordinate);
     }
-    // console.log("feature.get(type)",feature.get("type") );
-    console.log("feature", feature);
-    console.log("layer", layer);
   });
 });
